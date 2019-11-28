@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="html,layer,js," />
 
 
 
@@ -79,13 +79,15 @@
 
 
 
-<meta name="description" content="�Ȱ��ɵ���������">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Zrc&#39;s Blog">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;index.html">
+<meta name="description" content="关于html中a标签传入脚本的几种方式1、直接在href属性中添加方法形如：&amp;lt; a href=”javascript:js_method()”&amp;gt;javascript只是一个协议，后面紧跟着的是一个调用方法，注意调用的是方法，而不是从外部引入的脚本文件。2、在a标签中的onclick事件中绑定方法，形如：&amp;lt; a href=”javascript:void(0)” onclick=”">
+<meta name="keywords" content="html,layer,js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="a标签引入脚本以及layer插件的使用">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;28&#x2F;a%E6%A0%87%E7%AD%BE%E5%BC%95%E5%85%A5%E8%84%9A%E6%9C%AC%E4%BB%A5%E5%8F%8Alayer%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8&#x2F;index.html">
 <meta property="og:site_name" content="Zrc&#39;s Blog">
-<meta property="og:description" content="�Ȱ��ɵ���������">
+<meta property="og:description" content="关于html中a标签传入脚本的几种方式1、直接在href属性中添加方法形如：&amp;lt; a href=”javascript:js_method()”&amp;gt;javascript只是一个协议，后面紧跟着的是一个调用方法，注意调用的是方法，而不是从外部引入的脚本文件。2、在a标签中的onclick事件中绑定方法，形如：&amp;lt; a href=”javascript:void(0)” onclick=”">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-28T11:29:14.396Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -116,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/11/28/a标签引入脚本以及layer插件的使用/"/>
 
 
 
 
 
-  <title>Zrc's Blog</title>
+  <title>a标签引入脚本以及layer插件的使用 | Zrc's Blog</title>
   
 
 
@@ -141,8 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -235,9 +236,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -267,9 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="https://raydextert.github.io/2019/11/28/a%E6%A0%87%E7%AD%BE%E5%BC%95%E5%85%A5%E8%84%9A%E6%9C%AC%E4%BB%A5%E5%8F%8Alayer%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/" target="_blank" rel="noopener" itemprop="url">a标签引入脚本以及layer插件的使用</a></h1>
+          <h1 class="post-title" itemprop="name headline">a标签引入脚本以及layer插件的使用</h1>
         
 
         <div class="post-meta">
@@ -319,9 +318,7 @@
       
 
       
-        
-          
-            <h2 id="关于html中a标签传入脚本的几种方式"><a href="#关于html中a标签传入脚本的几种方式" class="headerlink" title="关于html中a标签传入脚本的几种方式"></a>关于html中a标签传入脚本的几种方式</h2><p>1、直接在href属性中添加方法形如：&lt; a href=”javascript:js_method()”&gt;javascript只是一个协议，后面紧跟着的是一个调用方法，注意调用的是方法，<font color="red">而不是从外部引入的脚本文件</font>。<br>2、在a标签中的onclick事件中绑定方法，形如：&lt; a href=”javascript:void(0)” onclick=”method()”&gt;void是一个操作符，void(0)则表示的是地址不发生跳转。<br>3、形如&lt; a href=”#” onclick=”js_method();return false;”&gt;执行了js之后页面不发生跳转<br><font color="red">注：以上的js都指的是的方法而不是js文件</font>  </p>
+        <h2 id="关于html中a标签传入脚本的几种方式"><a href="#关于html中a标签传入脚本的几种方式" class="headerlink" title="关于html中a标签传入脚本的几种方式"></a>关于html中a标签传入脚本的几种方式</h2><p>1、直接在href属性中添加方法形如：&lt; a href=”javascript:js_method()”&gt;javascript只是一个协议，后面紧跟着的是一个调用方法，注意调用的是方法，<font color="red">而不是从外部引入的脚本文件</font>。<br>2、在a标签中的onclick事件中绑定方法，形如：&lt; a href=”javascript:void(0)” onclick=”method()”&gt;void是一个操作符，void(0)则表示的是地址不发生跳转。<br>3、形如&lt; a href=”#” onclick=”js_method();return false;”&gt;执行了js之后页面不发生跳转<br><font color="red">注：以上的js都指的是的方法而不是js文件</font>  </p>
 <h2 id="layer的使用方法"><a href="#layer的使用方法" class="headerlink" title="layer的使用方法"></a>layer的使用方法</h2>  <code>
  function modifInfosFrm()  
 {
@@ -339,8 +336,6 @@
 
 });</code></pre><p>}<br></code><br>当要将html文件作为内容传入layer窗体中时 type类型要为2content中的可以填绝对路径也可以填相对路径<br>另外，layui.use是layer作为模块时的调用方法，当他作为独立组件的时候直接调用layer.open函数就行了</p>
 
-          
-        
       
     </div>
     
@@ -355,266 +350,40 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.comhttps://raydextert.github.io/2019/11/23/My-first-blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zrc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raydextert.github.io/pics/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zrc's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="https://raydextert.github.io/2019/11/23/My-first-blog/" target="_blank" rel="noopener" itemprop="url">My first blog</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-23T21:52:55+08:00">
-                2019-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="https://raydextert.github.io/tags/html/" target="_blank" rel="tag noopener"># html</a>
           
-            
+            <a href="https://raydextert.github.io/tags/layer/" target="_blank" rel="tag noopener"># layer</a>
           
-
+            <a href="https://raydextert.github.io/tags/js/" target="_blank" rel="tag noopener"># js</a>
           
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h1><p>  首先，经过我的一番努力，我的个人博客终于搭建完成了。而我搭建这个博客目的和初衷是为了记录我在编程学习<br>所遇到的困难以及解决办法。当然，也包含我在编程学习所学到的知识和对过往知识的总结。<br>   以上，就是我写博客的缘由总结了，如果你也对编程兴趣，那不妨就坚持下去吧，共勉！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.comhttps://raydextert.github.io/2019/11/23/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zrc">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raydextert.github.io/pics/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Zrc's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="https://raydextert.github.io/2019/11/23/hello-world/" target="_blank" rel="noopener" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-11-23T15:51:04+08:00">
-                2019-11-23
-              </time>
+              <a href="https://raydextert.github.io/2019/11/23/My-first-blog/" target="_blank" rel="next noopener" title="My first blog">
+                <i class="fa fa-chevron-left"></i> My first blog
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -624,10 +393,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -635,6 +405,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -655,8 +429,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -711,6 +494,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于html中a标签传入脚本的几种方式"><span class="nav-number">1.</span> <span class="nav-text">关于html中a标签传入脚本的几种方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#layer的使用方法"><span class="nav-number">2.</span> <span class="nav-text">layer的使用方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -851,6 +650,10 @@
 
 
   
+  <script type="text/javascript" src="https://raydextert.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="https://raydextert.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
