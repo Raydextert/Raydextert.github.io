@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Zrc&#39;s Blog">
 <meta property="og:description" content="线程基础由于下文所用的方法代码都在一个都已封装在一个类型，故先在这里进行说明   &#x2F;&#x2F;静态类 public static class Comman {     public static void PrintNumbers()     {         Console.WriteLine(&amp;quot;开始打印数字...&amp;quot;);         for (int i = 0; i &amp;lt;">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-25T14:51:41.900Z">
+<meta property="og:updated_time" content="2019-12-25T15:00:42.751Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -380,25 +380,14 @@ public static class Comman
   thread.Start();  
   //主线程 
   Comman.PrintNumbersWithDelay();</code></pre></code>
-支线程在主线程的方法前启动（代码二），则主线程和子线程都将开始执行各自的代码块，而在如果在后面（代码一）则会先调用方法待方法执行完之后，再执行支线程,因为这时支线程还没有开始启动
-### 2、线程等待
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里调用的是Thread的Thread.join()方法，目的是阻塞其他线程的执行直到当前线程执行完成
-### 3、线程终止
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以调用Thread中的Thread.abort()的方法，原理是向正在执行的线程扔出一个异常，从而使得线程终止。但是这方法并不值得推崇。因为，该异常可以在任何时刻发生并可能彻底摧毁应用程序。并且，使用这种方法也不一定总能终止该线程。目标线程可以通过处理该异常的并调用Thread.ResetAbort()方法来<font color="red">**拒绝被终止**</font>
-### 4、线程优先级
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里分两种情况  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、当<font color='red'>多核</font>运行多线程时：多线程不管优先级如何都有概率被CPU调用。优先级的高低只是决定了线程被CPU执行的<font color="red">**概率大小**</font>，<font color="red">**并不决定线程的执行顺序**</font>  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、当<font color='red'>单核</font>运行多线程时，可以理解为CPU只有一双手，所以同一时间只能执行一个线程，因此线程的优先级高低一般与执行顺序有关，通常一般是执行线程优先级更高的线程，但是并不一定要等到执行完高优先级的线程之后，再来执行低优先级的线程，同时也拥有概率执行低优先级的线程
-### 5、线程的状态
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过查看Thread.ThreadState属性即可知道
-### 6、前后台线程
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、前台线程：前台线程是不会被立即关闭的，它的关闭只会发生在自己执行完成时，不受外在因素的影响。假如应用程序退出，造成它的前台线程终止，此时CLR仍然保持活动并运行，使应用程序能继续运行，当它的的前台线程都终止后，整个进程才会被销毁  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、后台线程是可以随时被CLR关闭而不引发异常的，也就是说当后台线程被关闭时，资源的回收是立即的，不等待的，也不考虑后台线程是否执行完成，就算是正在执行中也立即被终止。  
-二者的区别：应用程序必须完成所有前台线程的才会完全退出，<font style="color:red;font-size:20px;">若前台线程未执行完成，关闭应用程序之后应用程序并未完全退出，任务管理器中还存在此线程。</font>而对于后台线程，应用程序则可以不考虑其是否已经运行完毕而直接退出，即应用程序结束时，所有后台线程都会自动结束。
-### 7、向线程传递参数  
-其实是将方法传递给线程，只是这个方法使用lambda表达式表示的
-<code>
+支线程在主线程的方法前启动（代码二），则主线程和子线程都将开始执行各自的代码块，而在如果在后面（代码一）则会先调用方法待方法执行完之后，再执行支线程,因为这时支线程还没有开始启动  
 
+<h3 id="2、线程等待"><a href="#2、线程等待" class="headerlink" title="2、线程等待"></a>2、线程等待</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里调用的是Thread的Thread.join()方法，目的是阻塞其他线程的执行直到当前线程执行完成  </p>
+<h3 id="3、线程终止"><a href="#3、线程终止" class="headerlink" title="3、线程终止"></a>3、线程终止</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以调用Thread中的Thread.abort()的方法，原理是向正在执行的线程扔出一个异常，从而使得线程终止。但是这方法并不值得推崇。因为，该异常可以在任何时刻发生并可能彻底摧毁应用程序。并且，使用这种方法也不一定总能终止该线程。目标线程可以通过处理该异常的并调用Thread.ResetAbort()方法来<font color="red"><strong>拒绝被终止</strong></font>  </p>
+<h3 id="4、线程优先级"><a href="#4、线程优先级" class="headerlink" title="4、线程优先级"></a>4、线程优先级</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里分两种情况<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、当<font color='red'>多核</font>运行多线程时：多线程不管优先级如何都有概率被CPU调用。优先级的高低只是决定了线程被CPU执行的<font color="red"><strong>概率大小</strong></font>，<font color="red"><strong>并不决定线程的执行顺序</strong></font><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、当<font color='red'>单核</font>运行多线程时，可以理解为CPU只有一双手，所以同一时间只能执行一个线程，因此线程的优先级高低一般与执行顺序有关，通常一般是执行线程优先级更高的线程，但是并不一定要等到执行完高优先级的线程之后，再来执行低优先级的线程，同时也拥有概率执行低优先级的线程  </p>
+<h3 id="5、线程的状态"><a href="#5、线程的状态" class="headerlink" title="5、线程的状态"></a>5、线程的状态</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过查看Thread.ThreadState属性即可知道  </p>
+<h3 id="6、前后台线程"><a href="#6、前后台线程" class="headerlink" title="6、前后台线程"></a>6、前后台线程</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、前台线程：前台线程是不会被立即关闭的，它的关闭只会发生在自己执行完成时，不受外在因素的影响。假如应用程序退出，造成它的前台线程终止，此时CLR仍然保持活动并运行，使应用程序能继续运行，当它的的前台线程都终止后，整个进程才会被销毁<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、后台线程是可以随时被CLR关闭而不引发异常的，也就是说当后台线程被关闭时，资源的回收是立即的，不等待的，也不考虑后台线程是否执行完成，就算是正在执行中也立即被终止。<br>二者的区别：应用程序必须完成所有前台线程的才会完全退出，<font style="color:red;font-size:20px;">若前台线程未执行完成，关闭应用程序之后应用程序并未完全退出，任务管理器中还存在此线程。</font>而对于后台线程，应用程序则可以不考虑其是否已经运行完毕而直接退出，即应用程序结束时，所有后台线程都会自动结束。  </p>
+<h3 id="7、向线程传递参数"><a href="#7、向线程传递参数" class="headerlink" title="7、向线程传递参数"></a>7、向线程传递参数</h3><p>其实是将方法传递给线程，只是这个方法使用lambda表达式表示的<br><code></p>
 <pre><code>//使用lambda表达式引用另一个C#对象称为闭包,本质上还是生成一个委托
  Thread t3 = new Thread(() =&gt; { CountNumbers(9); });
  t3.Name = &quot;t3&quot;;
@@ -417,10 +406,9 @@ public static class Comman
  t5.Name = &quot;t5&quot;;
  t4.Start();
  t5.Start();
- Console.ReadKey();</code></pre></code>
-### 8、lock关键字详细讲解
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[lock关键字的详细讲解链接](https://www.cnblogs.com/jintianhu/archive/2010/11/19/1881494.html)
+ Console.ReadKey();</code></pre></code>  
 
+<h3 id="8、lock关键字详细讲解"><a href="#8、lock关键字详细讲解" class="headerlink" title="8、lock关键字详细讲解"></a>8、lock关键字详细讲解</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.cnblogs.com/jintianhu/archive/2010/11/19/1881494.html" target="_blank" rel="noopener">lock关键字的详细讲解链接</a>  </p>
 <h3 id="9、使用Monitor类锁定资源"><a href="#9、使用Monitor类锁定资源" class="headerlink" title="9、使用Monitor类锁定资源"></a>9、使用Monitor类锁定资源</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.cnblogs.com/sunshinetian/articles/2510926.html" target="_blank" rel="noopener">使用Monitor类锁定资源链接</a></p>
 
       
@@ -589,7 +577,7 @@ public static class Comman
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程基础"><span class="nav-number">1.</span> <span class="nav-text">线程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、线程暂停"><span class="nav-number">1.1.</span> <span class="nav-text">1、线程暂停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、使用Monitor类锁定资源"><span class="nav-number">1.2.</span> <span class="nav-text">9、使用Monitor类锁定资源</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程基础"><span class="nav-number">1.</span> <span class="nav-text">线程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、线程暂停"><span class="nav-number">1.1.</span> <span class="nav-text">1、线程暂停</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、线程等待"><span class="nav-number">1.2.</span> <span class="nav-text">2、线程等待</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、线程终止"><span class="nav-number">1.3.</span> <span class="nav-text">3、线程终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、线程优先级"><span class="nav-number">1.4.</span> <span class="nav-text">4、线程优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、线程的状态"><span class="nav-number">1.5.</span> <span class="nav-text">5、线程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、前后台线程"><span class="nav-number">1.6.</span> <span class="nav-text">6、前后台线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、向线程传递参数"><span class="nav-number">1.7.</span> <span class="nav-text">7、向线程传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8、lock关键字详细讲解"><span class="nav-number">1.8.</span> <span class="nav-text">8、lock关键字详细讲解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9、使用Monitor类锁定资源"><span class="nav-number">1.9.</span> <span class="nav-text">9、使用Monitor类锁定资源</span></a></li></ol></li></ol></div>
             
 
           </div>
