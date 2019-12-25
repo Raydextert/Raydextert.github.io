@@ -250,6 +250,235 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.comhttps://raydextert.github.io/2019/12/25/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zrc">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raydextert.github.io/pics/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Zrc's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="https://raydextert.github.io/2019/12/25/%E7%BA%BF%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" target="_blank" rel="noopener" itemprop="url">线程基础知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-25T16:38:56+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>title: 线程基础知识<br>date: 2019-12-25 16:38:56<br>tags:</p>
+<ul>
+<li>C#</li>
+<li>线程</li>
+</ul>
+<p>##线程基础<br>由于下文所用的方法代码都在一个都已封装在一个类型，故先在这里进行说明<br><code></p>
+<pre><code>  //静态类
+public static class Comman
+{
+    public static void PrintNumbers()
+    {
+        Console.WriteLine(&quot;开始打印数字...&quot;);
+        for (int i = 0; i &lt; 10; i++)
+        {   
+            //格式化字符串中前面的数字，如0、1可以表示为后面要格式化输出对象的索引
+
+            Console.WriteLine(string.Format(&quot;当前线程ID：{0:G},当前数字：{1:G}&quot;,Thread.CurrentThread.ManagedThreadId,i));
+        }
+    }
+
+    public static void PrintNumbersWithDelay()
+    {
+        Console.WriteLine(&quot;开始打印数字...&quot;);
+        for (int i = 0; i &lt; 10; i++)
+        {
+            // 暂停线程
+            Thread.Sleep(1000);
+            Console.WriteLine(string.Format(&quot;当前线程ID：{0:G},当前数字：{1:G}&quot;, Thread.CurrentThread.ManagedThreadId, i));
+        }
+    }
+
+    public static void PrintNumbersWithStatus()
+    {
+        Console.WriteLine(&quot;开始打印数字...&quot;);
+        string threadState = Thread.CurrentThread.ThreadState.ToString();
+
+        Console.WriteLine(string.Format(&quot;当前线程的状态：{0:G}&quot;, threadState));
+
+        for (int i = 0; i &lt; 10; i++)
+        {
+
+            Thread.Sleep(1000);
+            Console.WriteLine(string.Format(&quot;当前线程ID：{0:G},当前数字：{1:G}&quot;, Thread.CurrentThread.ManagedThreadId, i));
+        }
+    }
+
+}</code></pre></code>
+
+<p>###1、线程暂停<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;线程暂停指的是调用Thread静态方法Sleep方法使得当前线程在指定时间内暂停执行代码，但是这里需要注意的是子线程在主线程中的启动位置。如下面两段代码所示：<br><code></p>
+<pre><code>  一、子线程在主线程调用方法后启动
+  //主线程 
+  Comman.PrintNumbersWithDelay();
+  //支线程
+  Thread thread = new Thread(Comman.PrintNumbers);
+  thread.Start();
+
+
+  //暂停窗口
+  Console.ReadKey();
+
+============================
+二、子线程在主线程调用方法前面启动
+ //支线程
+  Thread thread = new Thread(Comman.PrintNumbers);
+  thread.Start();  
+  //主线程 
+  Comman.PrintNumbersWithDelay();</code></pre></code>
+支线程在主线程的方法前启动（代码二），则主线程和子线程都将开始执行各自的代码块，而在如果在后面（代码一）则会先调用方法待方法执行完之后，再执行支线程,因为这时支线程还没有开始启动
+###2、线程等待
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里调用的是Thread的Thread.join()方法，目的是阻塞其他线程的执行直到当前线程执行完成
+###3、线程终止
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;可以调用Thread中的Thread.abort()的方法，原理是向正在执行的线程扔出一个异常，从而使得线程终止。但是这方法并不值得推崇。因为，该异常可以在任何时刻发生并可能彻底摧毁应用程序。并且，使用这种方法也不一定总能终止该线程。目标线程可以通过处理该异常的并调用Thread.ResetAbort()方法来<font color="red">**拒绝被终止**</font>
+###4、线程优先级
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里分两种情况  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、当<font color='red'>多核</font>运行多线程时：多线程不管优先级如何都有概率被CPU调用。优先级的高低只是决定了线程被CPU执行的<font color="red">**概率大小**</font>，<font color="red">**并不决定线程的执行顺序**</font>  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、当<font color='red'>单核</font>运行多线程时，可以理解为CPU只有一双手，所以同一时间只能执行一个线程，因此线程的优先级高低一般与执行顺序有关，通常一般是执行线程优先级更高的线程，但是并不一定要等到执行完高优先级的线程之后，再来执行低优先级的线程，同时也拥有概率执行低优先级的线程
+###5、线程的状态
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过查看Thread.ThreadState属性即可知道
+###6、前后台线程
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1、前台线程：前台线程是不会被立即关闭的，它的关闭只会发生在自己执行完成时，不受外在因素的影响。假如应用程序退出，造成它的前台线程终止，此时CLR仍然保持活动并运行，使应用程序能继续运行，当它的的前台线程都终止后，整个进程才会被销毁  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、后台线程是可以随时被CLR关闭而不引发异常的，也就是说当后台线程被关闭时，资源的回收是立即的，不等待的，也不考虑后台线程是否执行完成，就算是正在执行中也立即被终止。  
+二者的区别：应用程序必须完成所有前台线程的才会完全退出，<font style="color:red;font-size:20px;">若前台线程未执行完成，关闭应用程序之后应用程序并未完全退出，任务管理器中还存在此线程。</font>而对于后台线程，应用程序则可以不考虑其是否已经运行完毕而直接退出，即应用程序结束时，所有后台线程都会自动结束。
+###7、向线程传递参数  
+其实是将方法传递给线程，只是这个方法使用lambda表达式表示的
+<code>
+
+<pre><code>//使用lambda表达式引用另一个C#对象称为闭包,本质上还是生成一个委托
+ Thread t3 = new Thread(() =&gt; { CountNumbers(9); });
+ t3.Name = &quot;t3&quot;;
+ t3.Start();
+ t3.Join();
+ Console.WriteLine(&quot;=========================================&quot;);
+
+
+ //在lambda表达式使用任何局部变量时，C#都会生成一个类，并将该变量作为该类的属性
+ //所有以这个局部变量作为方法参数的线程都是共享此变量的
+ int i = 10;
+ var t4 = new Thread(() =&gt; { PrintNumbers(i); });
+ t4.Name = &quot;t4&quot;;
+ i = 12;
+ var t5 = new Thread(() =&gt; { PrintNumbers(i); });
+ t5.Name = &quot;t5&quot;;
+ t4.Start();
+ t5.Start();
+ Console.ReadKey();</code></pre></code>
+###8、lock关键字详细讲解
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[lock关键字的详细讲解链接](https://www.cnblogs.com/jintianhu/archive/2010/11/19/1881494.html)
+
+<p>###9、使用Monitor类锁定资源<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://www.cnblogs.com/sunshinetian/articles/2510926.html" target="_blank" rel="noopener">使用Monitor类锁定资源链接</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.comhttps://raydextert.github.io/2019/11/28/a%E6%A0%87%E7%AD%BE%E5%BC%95%E5%85%A5%E8%84%9A%E6%9C%AC%E4%BB%A5%E5%8F%8Alayer%E6%8F%92%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -675,7 +904,7 @@
               
                 <a href="https://raydextert.github.io/archives/%20" target="_blank" rel="noopener">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
